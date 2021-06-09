@@ -1,0 +1,6 @@
+uvicorn
+fastapi
+pytesseract
+python-multipart
+pdf2image
+poppler-utils
