@@ -1,7 +1,6 @@
 import os
 from PIL import Image
 from pdf2image import convert_from_path
-import pdf2image
 import pytesseract
 from pytesseract import image_to_string
 import uvicorn
@@ -12,6 +11,11 @@ import shutil
 from typing import Optional, List, Tuple
 import platform
 import re
+from invoice2data.extract.loader import read_templates
+from invoice2data import extract_data
+import invoice2data.input.pdf2image_wrapper as pdf2img
+import logging
+import logging.config 
 
 # в зависимости от платформы загружаем бибилиотеки и настрйоки 
 plt = platform.system()
@@ -30,7 +34,7 @@ os.makedirs(temp_path, exist_ok=True)
 print('OCR Version: ',pytesseract.get_tesseract_version())
 
 # разрешенные расширения
-ALLOWED_EXTENSIONS_PAGE = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
+ALLOWED_EXTENSIONS_PAGE = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'tiff'}
 ALLOWED_EXTENSIONS_PAGES = {'pdf'}
 
 app = FastAPI()
@@ -48,10 +52,11 @@ def ocr_image(image, config):
 # удаляем из текста лишние символы
 def preprocessing_text(text):
     text = re.sub('[!@#$]', ' ', text)
-    text = re.sub('\n\n}', '\n', text)
+    text = re.sub('{\n\n}', '\n', text)
     text = re.sub('\s{2,}', ' ', text)
     text = re.sub('^\s$', ' ', text)
     return text
+
 
 def run(image, config):
     text_source = ocr_image(image, config)
@@ -69,6 +74,41 @@ def run(image, config):
             result.append({"id": id, "text": s})    
 
     return {"result": result}
+
+
+@app.post("/invoice/", tags=["OCR Invoice"], summary="OCR invoice",)
+async def invoice(
+        invoice: UploadFile = File(...),
+        language: str = Query(
+            "deu", enum=["eng", "deu", "rus"], description='Choice language OCR'),
+        ):
+    """
+    Распознавание изображений и PDF со счетами:
+    - настроены 2 шаблона счетов
+    - **JACOB Elektronik GmbH**
+    - **OTTO Office GmbH & Co KG**
+    """
+    if invoice.filename and invoice.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS_PAGE:
+        with open(f'{temp_path}/{invoice.filename}', "wb") as buffer:
+            shutil.copyfileobj(invoice.file, buffer)
+
+    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig()
+
+    templates_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), 
+        'templates'
+        )
+
+    templates=read_templates(templates_path)
+    result = extract_data(
+        os.path.abspath(f'{temp_path}/{invoice.filename}'), 
+        templates=templates, 
+        input_module=pdf2img,
+        language = language,
+        )
+    return(result)
+
 
 @app.post("/page/")
 async def image(image: UploadFile = File(...),

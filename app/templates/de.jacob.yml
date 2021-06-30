@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+issuer: JACOB Elektronik GmbH
+fields:
+  amount: Bezeichnung.*-\s(\d+\,\d+)
+  date: Bezeichnung\s(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s([A-Z]+\d+)
+keywords:
+  - JACOB Elektronik GmbH
+options:
+  currency: EUR
+  date_formats:
+    - '%d.%m.%Y'
+  languages:
+    - de
+  decimal_separator: ','
+lines:
+  start: Pos. Menge Art-Nr.+€
+  end: Warenwert
+  first_line: ^(?P<position>\d+?)\.\s(?P<count>\d+?\,\d{2})\s(?P<sku>\d+?)\s(?P<desc>.+?[^d{2,}\sd{3,}\,\d{2}])$  
+  line: ^(?P<position>\d+?)\.\s(?P<count>\d+?\,\d{2})\s(?P<sku>\d+?)\s(?P<desc>.+?)\s(?P<price>\d+,\d{2})\s(?P<total>\d+,\d{2})$
+  last_line: ^(?P<desc>[^\d+?\.].+?)$
+  # start: Pos. Menge Art-Nr.+G-Preis €
+  # end: Warenwert
+  # line: ^(?P<desc>.+)$
+types:
+    count: float
+    price: float
+    total: float

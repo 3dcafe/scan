@@ -4,3 +4,6 @@ pytesseract
 python-multipart
 pdf2image
 poppler-utils
+dateparser
+unidecode
+chardet

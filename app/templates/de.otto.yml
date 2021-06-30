@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+issuer: OTTO Office GmbH & Co KG
+fields:
+  amount: Betrag:\s+(\d+\,\d+)
+  date: Datum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung Nr.+?(\d+)
+keywords:
+  - OTTO Office
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Bestell-Nr
+  end: Nettowarenwert
+  line: ^(?P<sku>\w+\-\w+)\s(?P<desc>.+?)\s(?P<count>\d+?)\s(?P<be>[A-Z]+)\s(?P<vat>\d+)\%\s(?P<price>\d+\,\d{2})\s*€\s(?P<total>\d+\,\d{2})\s*€$
+  #line: ^(?P<position>\d+?)\.\s(?P<count>\d+?\,\d{2})\s(?P<sku>\d+?)\s(?P<desc>.+?)\s(?P<Price1>\d+,\d{2})\s(?P<Price2>\d+,\d{2})$
+  #last_line: ^(?P<desc>[^\d+?\.].+?)$
+types:
+  count: float
+  price: float
+  total: float
