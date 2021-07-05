@@ -41,7 +41,7 @@ def to_text(path, language='eng'):
         images = convert_from_path(
             os.path.abspath(path),
             poppler_path=poppler_path,
-            dpi=300,
+            dpi=600,
             fmt="tiff"
         )
 
