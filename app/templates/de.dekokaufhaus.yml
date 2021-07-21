@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: dekokaufhaus
+fields:
+  amount: SUMME.*\s+(\d+\,\d+)
+  date: Rechnungsdatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer:\s+(\d+)
+keywords:
+  - Glaswaren, Wohnaccessolres
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)BESCHREIBUNG(?:$|\W)
+  end: NETTO
+  line: (?P<discriprion>.*\w+)\s(?P<factor>\d,\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

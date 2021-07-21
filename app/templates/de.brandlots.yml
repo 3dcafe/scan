@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: brandlots
+fields:
+  amount: Gesamtbetrag\s+(\d+\,\d+)
+  date: (\d+\.\d+\.\d+)
+  invoice_number: Re.-Nr.:\s(\w+\d+)
+keywords:
+  - Brandlots, Pascal Str. 4
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Bezeichnung(?:$|\W)
+  end: Gesamt
+  line: (?P<position>\d)\s(?P<quantity>\d).*\s(?P<tax>\d+)\W\s(?P<single_price>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

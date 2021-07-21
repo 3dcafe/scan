@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: CloudGears
+fields:
+  amount: Summe netto.*\D+.*\D+(\d+.\d+,\d+)
+  date: Germany\s+.*\W(\d+.\d+.\d+)
+  invoice_number: Germany\s+(\w+-\d+-\d+)
+keywords:
+  - CloudGears
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Stunden
+  end: Notizen
+  line: (?P<type>\w+)\s.*(?P<quantity>\d\d\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

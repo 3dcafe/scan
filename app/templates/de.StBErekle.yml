@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: stberekle
+fields:
+  amount: Rechnungsbetrag\s+\w.\w+,\w+\W+\s+\w.\w+,\w+\W+\s+\w.\w+,\w+\W+(\d+.\d+)
+  date: (\d{2}\.\d+\.\d+)
+  invoice_number: nummer.*\s+(\d+)
+keywords:
+  - Erekle Solomnishvili
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Lieferungsnr(?:$|\W)
+  end: Summe
+  line: ^(?P<position>\d+?)\s(?P<desc>.+)\s(?P<count>\d+)\s(?P<part>.+)\s(?P<Price1>\d+,\d{2})\s(?P<Price2>\d+,\d{2})$
+types:
+  count: float
+  price: float
+  total: float

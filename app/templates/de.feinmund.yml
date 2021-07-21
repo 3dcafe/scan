@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: feinmund
+fields:
+  amount: Gesamtkosten:\s+(\d+\S+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Nr.\s+(\d+)
+keywords:
+  - FEINMUND | Oberwirtstr
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamt
+  end:  Rouge
+  line: (?P<quantity>\d)\s(?P<vat>\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  gesamtsumme: float

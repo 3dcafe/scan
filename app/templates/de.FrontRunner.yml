@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: FrontRunner
+fields:
+  amount: SUMME.*\s+(\d+\,\d+)
+  date: DATUM.*\s+(\d+\.\w+\s+\d+)
+  invoice_number: RECHNUNG.*\s+(\d+)
+keywords:
+  - FRONT RUNNER
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)IEPEREt(?:$|\W)
+  end: SUMME
+  line: (?P<description>.*\w)\s\w+\s(?P<standard_lines>\d+,\d+)\s(?P<line_price>\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

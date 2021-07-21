@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-issuer: Versatel
+issuer: Deutsche Post
 fields:
-  amount: Bruttogesamtbetrag\s+(\d+\,\d+)\sEUR
-  date: \d{4}\s(\d\d\.\d\d\.\d{4})
-  invoice_number: ([A-Z]\d{9})\s\d+
+  amount: Rechnungsbetrag\s+(\d+\,\d+)
+  date: \n+(\d\d\.\d\d\.\d{4})
+  invoice_number: Rechnungs-Nr.:\s+(\w+-\d+-\w+-\d+)
 keywords:
-  - Versatel
+  - Deutsche Post
 options:
   currency: EUR
   date_formats:
@@ -14,12 +14,15 @@ options:
     - de
   decimal_separator: ","
 lines:
-  start: Nummer
-  end: Nettogesamtbetrag
-  first_line: ^(?P<desc>[^\d+?\.\,\()S][um]*.+?[^\)z])$
-  line: ^(?P<sku>\d+_\d+?)\s(?P<desc>.+)\s(?P<count>\d+)\s(?P<time>\d\d\:\d\d\:\d\d)\s(?P<price>\d+\,\d+)\s(?P<total>\d+\,\d+)\s(?P<vat>\d+)$
-  last_line: ^(?P<sku>\d+_\d+?)\s(?P<desc>.+)\s(?P<count>\d+)\s(?P<price>\d+\,\d+)\s(?P<total>\d+\,\d+)\s(?P<vat>\d+)$
+  start: (?:^|\W)Bruttopreis(?:$|\W)
+  end: \n+(\d+\,\d+)
+  line: ^(?P<position>\d+?)\s(?P<desc>\w+)\s(?P<type>\w+)\s(?P<weight>(\d+\,\d+))\s(?P<type_weight>\w+)\s(?P<size>\((.*?)\))\s(?P<persent>(\d+))\%\s(?P<price>(\d+\,\d+))
 types:
   count: float
   price: float
   total: float
+  
+#Pos. Produkt USt-Satz Bruttopreis
+#1 Paket bis 31,5 kg (max. 120 x 60 x 60cm) 19% 16,49 EUR
+#16,49 Euro enthalten 19 % Umsatzsteuer 2,63 EUR
+#Rechnungsbetrag 16,49 EUR

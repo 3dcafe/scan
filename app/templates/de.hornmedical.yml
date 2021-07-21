@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: HORNMEDICAL
+fields:
+  amount: brutto:\s+(\d+\,\d+)
+  date: vom:\s+(\d+\.\d+\.\d+)
+  invoice_number: Nummer:\s+(\d+)
+keywords:
+  - Horn Medical Producing
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Wert
+  end: Gesamtbetrag
+  line: (?P<single_price>\d+,\d+).*\s(?P<shipping_costs>\d,\d+).*\s(?P<discount>\d+,\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

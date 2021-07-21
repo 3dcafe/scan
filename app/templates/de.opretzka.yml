@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Opretzka
+fields:
+  amount: inkl..*\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Nummer:\s+(\d+)
+keywords:
+  - Lohn- und Gehaltsabrechnungen
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Artikelbezeichnung(?:$|\W)
+  end: Total
+  line: (?P<position>\d)\s(?P<article_name>\w+\W.*\w+).*\s(?P<quantity>\d+)\s(?P<price>\d+,\d+).*\s(?P<PE>\d)\s(?P<vot>\d+,\d).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

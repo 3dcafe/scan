@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: kiwi
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\,\d+)
+  date: Paris,\s(\d+-\d+-)
+  invoice_number: nvoice.*\W+.*(\d{4}-\d+)
+keywords:
+  - Kiwi.com
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Total(?:$|\W)
+  end: VATO
+  line: (?P<position>\d)\s(?P<type>\w+)\s(?P<description>\w+\s-\s\w+,\s.*\w+)\s(?P<vat>\d)\s\W\s\W\s(\d+.\d+)\s\W\s(?P<total>\d+\W\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

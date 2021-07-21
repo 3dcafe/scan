@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+issuer: POSTERLOUNGE
+fields:
+  amount: Gesamtbetrag:.*\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnr\..* (\d+)
+  #amount: Gesamtbetrag:.*\s+(\d+\,\d+)
+  #date: Datum:\s+(\d+\.\d+\.\d+)
+  #invoice_number: Rechnungsnr\.: (\d+)
+keywords:
+  - POSTERLOUNGE
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamtpreis
+  end: Leistungsdatum
+  line: (?P<price>\d+\,\d+).*\s+(?P<summ>\d+\,\d+)
+types:
+  count: float
+  price: float
+  total: float

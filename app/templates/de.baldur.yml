@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: baldur
+fields:
+  amount: Endsumme.*\s+(?!16.77)(\d+\S+\,\d+)
+  date: Belegdatum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(\w+\-\d+)
+keywords:
+  - BALDUR-Garten
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: MwSt
+  end: Endsumme
+  line: (?P<position>\d)\s(?P<lot>\d).*\s(?P<items>\d+)\s(?P<price>\d+,\d+)\s\w+\s(?P<amount>\d+,\d+)\s\w+\s(?P<vat>\d\W)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

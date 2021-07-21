@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Meisterhand
+fields:
+  amount: (\d+,\d+)\s+Telefon
+  date: (\d+.\d+.\d+)\s.+\w+\s+Betrag
+  invoice_number: (\d+)\s+\d+.\d+.\d+\s.+\w+\s+Betrag
+keywords:
+  - Meisterhand Berlin
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Preis
+  end: Betrag
+  line: (?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

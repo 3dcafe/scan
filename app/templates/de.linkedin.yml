@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: LinkedIn
+fields:
+  amount: Zahlung:\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer:\s(\d+)
+keywords:
+  - LinkedIn
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Preis
+  end: Zwischensumme
+  line: (?P<price>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

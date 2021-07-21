@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: selfstorage
+fields:
+  amount: Gesamtsumme:.*(\d\d\,\d+)
+  date: Datum:\s+(\d+\-\d+\-\d+)
+  invoice_number: Rechnung.*\s+(\d+\-\d+)
+keywords:
+  - Bei Umzug neue
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Summe
+  end: Umsatz
+  line: (?P<data>\d+-\d+-\d+)\D+.*(?P<total>\W\d\d,\d+)
+types:
+  count: float
+  price: float
+  gesamtsumme: float

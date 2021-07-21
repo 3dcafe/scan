@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Alternate
+fields:
+  amount: Rechnungsendbetrag.*\s+(\d+\,\d+)
+  date: Versanddatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungs-Nr.\s+(\d+)
+keywords:
+  - Nadezda Ekkert Aureum
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Sosslau
+  end: SN
+  line: (?P<quantity>\d).*\s(?P<total>\d+,\d+)\s(?P<vat>\w)
+types:
+  count: float
+  price: float
+  total: float

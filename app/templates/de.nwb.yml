@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: NWB
+fields:
+  amount: Gesamtbrutto.*\s+(\d+\,\d+)
+  date: (\d+\.\d+\.\d+)\s+.*Datum
+  invoice_number: (\d{9}).*\s+Kundennummer
+keywords:
+  - NWB Verlag
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Rabatt(?:$|\W)
+  end: Unternehmensbeteiligungen
+  line: (?P<position>\d)\s(?P<order>\w+).*\s+(?P<attendees>\w+,\s\w+)\s(?P<price>\d+,\d+)\s(?P<discount>\d\W)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

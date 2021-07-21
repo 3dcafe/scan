@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Proimage
+fields:
+  amount: Total amount\s+(\d+.\d+)
+  date: Date:\s+(\d+\/\d+\/\d+)
+  invoice_number: No.:\s+(\d+)
+keywords:
+  - Proimage B.V.
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: "."
+lines:
+  start: Description
+  end: Net amount
+  line: (?P<position>\d)\s\w+-
+types:
+  count: float
+  price: float
+  total: float

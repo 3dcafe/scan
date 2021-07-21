@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: MoetHennessy
+fields:
+  amount: Rechnungsbetrug EUR\s+(\d+.\d+,\d+)
+  date: LIEFERDATUM\s+(\d+\.\d+\.\d+)
+  invoice_number: Beleg-Nr..*\s+(\w+\d+)
+keywords:
+  - CHAMPAGNE DOM
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: PERIGNON
+  end: VINTAGE
+  line: (?P<quantity>\d+)\s(?P<prell_price>\d+,\d+)\s(?P<net_price>\d+,\d+)\s(?P<total>\d.\d+.\d+)
+types:
+  count: float
+  price: float
+  summe: float

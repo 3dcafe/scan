@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: SrNetworks
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\,\d+)
+  date: Lieferdatum:.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungs-Nr.:.*(\d{10})
+keywords:
+  - srNetworks
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Preis
+  end: Flachen
+  line: (?P<position>\d)\s(?P<nr>\w+-\d+).*\s(?P<subject>\w\d-\w-\w)\s\W\d\s\W(?P<vat>\d+)\s\W+(?P<extended_pay>\d+,\d+).*\s(?P<price>\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

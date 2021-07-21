@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Prototyp
+fields:
+  amount: Gesamtbetrag:\s+(\d+\,\d+)
+  date: Rechnungsdatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: (\w+\-\d+\-\d\-\d+)
+keywords:
+  - Prototyp GmbH & Co. KG
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Bezeichnung(?:$|\W)
+  end: Summe
+  line: ^(?P<position>\d+?)\s(?P<desc>.+)\s(?P<count>\d+)\s(?P<part>.+)\s(?P<Price1>\d+,\d{2})\s(?P<Price2>\d+,\d{2})$
+types:
+  count: float
+  price: float
+  summe: float

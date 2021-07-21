@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+issuer: dasautoderwein
+fields:
+  amount: Gesamt.*\s+(?!12.93)(\d+\,\d+)
+  date: Datum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungs.*\s+(\d+)
+keywords:
+  - Lothar Gardemann
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Rechnung(?:$|\W)
+  end: NETTOBETRAG
+  line: (?P<quantity>\d)\s(?P<price>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  gesamt: float
+  

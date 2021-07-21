@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Breitinger
+fields:
+  amount: Endbetrag\s+(\d+\,\d+)
+  date: Rechnung.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung\s+(\d+)
+keywords:
+  - Breitinger AG USM pur
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Lieferschein(?:$|\W)
+  end: Servierwagen
+  line: (?P<description>\d\s\d\s\d+-\d+-\d+-\d+-\d+)\s(?P<price>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

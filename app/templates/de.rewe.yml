@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: REWE
+fields:
+  amount: Summe:\s+(\d+\,\d+)
+  date: Bestelldatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung\s+(?!38)(\w+\d+)
+keywords:
+  - REWE Markt GmbH
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Pos. MwSt.
+  end: Summe nach Steuersatz
+  line: (?P<price>\d+\,\d+).*\s+(?P<summ>\d+\,\d+)
+types:
+  count: float
+  price: float
+  summe: float

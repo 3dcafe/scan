@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: StempelToenges
+fields:
+  amount: Gesamt brutto:\s+(\d+\,\d+)
+  date: Rechnungsdatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer:\s(\w\d+)
+keywords:
+  - Stempel Toenges
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Nettopreis
+  end: Kissenfarbe
+  line: (?P<item>\d)\s(?P<model>\d+)\s+\w+\s\w+\s\d+\s(?P<single_price>\d+,\d+)\s\w+\s(?P<price>\d+,\d+)\s\w+\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

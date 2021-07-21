@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: THE MANDALA HOTEL
+fields:
+  amount: Gesamt\s+(\d+\S+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungskopie\s+(\d+)
+keywords:
+  - THE MANDALA HOTEL
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Beschreibung(?:$|\W)
+  end: Kreditkarte
+  line: (?P<data>\d+.\d+.\d+)\s(?P<description>\w+)\s(?P<debit>\d+,\d+)\s(?P<Kredit>\d,\d+)
+types:
+  count: float
+  price: float
+  total: float

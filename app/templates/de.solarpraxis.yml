@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: solarpraxis
+fields:
+  amount: Rechnungsbetrag:\s+(\d+\S+\,\d+)
+  date: Rechnungsdatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer.+?(\d+)
+keywords:
+  - Solarpraxis
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Eee
+  end: Belastetes
+  line: (?P<description>\D+)\s(?P<single_price>\w+,\w+\W+)\s(?P<subtotal>\w+,\w+\W+)\s(?P<vat>\w+\D+)\s(?P<gross>\w+,\w+\s\W)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

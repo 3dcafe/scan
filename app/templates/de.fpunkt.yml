@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: fpunkt
+fields:
+  amount: Endsumme.*\s+(\d+\,\d+)
+  date: Rechnung.*\s+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+([0-9]+\.[0-9]+\.[0-9]+)
+  invoice_number: Rechnung.*\s+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+.*\W+(\w{2}\d{6})
+keywords:
+  - F-Punkt oHG
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Bezeichnung(?:$|\W)
+  end: Universalpapier
+  line: (?P<items>\w+\W\w+)\s(?P<description>.*\w+)\s(?P<quantity>\d,\d+)\s(?P<price>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: SicherheitNord
+fields:
+  amount: Mwst\W\s(\d+,\d+)
+  date: Datum\s+\d+\s\d+\s(\d+.\d+.\d+)
+  invoice_number: Datum\s+\d+\s(\d+)
+keywords:
+  - Sicherheitswirtschaft
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Mandats
+  end: Total
+  line: (?P<single_price>\d+,\d+)\s(?P<total>.\w+,\d+)
+types:
+  count: float
+  price: float
+  total: float

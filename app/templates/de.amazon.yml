@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 issuer: Amazon
 fields:
-  amount: GESAMT:\|(\d+\,\d+)
-  date: Lieferdatum:(\d\d\.\d\d\.\d{4})
-  invoice_number: Rechnungsnummer:(\w+-\w+-\w+-\d+-\d+)
+  amount: GESAMT:\W+(\d+,\d+)
+  date: Lieferdatum\W+(\d+.\d+.\d+)
+  invoice_number: Rechnungsnummer\W+(\w+-\w+-\w+-\w+-\d+)
 keywords:
   - Amazon EU
 options:
@@ -14,9 +14,9 @@ options:
     - de
   decimal_separator: ","
 lines:
-  start: (?:^|\W)inkl. USt(?:$|\W)
-  end: (?:^|\W)GESAMT(?:$|\W)
-  line: ^(?P<cout>\d+) (?P<nummer>\w+) (?P<summ>\d+\,\d+) ˆ (?P<percent>\d+%) \[?(?P<price>\d+\,\d+) ˆ (?P<price2>\d+\,\d+) ˆ$
+  start: MengelBeschreibung
+  end: GESAMT
+  line: (?P<quantity>\d).*\s(?P<vat>\d+)\W\s+.\w+,\d+\s\W\s(?P<total>\d+,\d+)
   #^(?P<desc>.+)$
 types:
   count: float

@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: grenke
+fields:
+  amount: Rechnungsbetrag\s+(\d+\,\d+)
+  date: Zeitraum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s(\d+\/\d+)
+keywords:
+  - GRENKE AG
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Betrag
+  end: Umsatzsteuer
+  line: (?P<discriprion>.*\w+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

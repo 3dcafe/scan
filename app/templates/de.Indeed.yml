@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: indeed
+fields:
+  amount: Gesamtbetrag\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(\d{8})
+keywords:
+  - Indeed
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Betrag(?:$|\W)
+  end: May
+  line: (?P<amount>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

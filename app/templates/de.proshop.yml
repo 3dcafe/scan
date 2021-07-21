@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: proshop
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\,\d+)
+  date: Lieferdatum\s+(\d+\-\d+\-\d+)
+  invoice_number: Rechnung\s+(\d+)
+keywords:
+  - Die Rechnung gilt als Kaufbeweis
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Betrag
+  end: Netto
+  line: (?P<nr>\w+).*\s+(?P<price>\d+\,\d+).*\s+(?P<summ>\d+\,\d+)
+types:
+  count: float
+  price: float
+  gesamtsumme: float

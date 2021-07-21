@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: dacksamsterdam
+fields:
+  amount: Gesamtsumme:\s+(\d+\S+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung Nr.:*\s+(\d+)
+keywords:
+  - Dacks Amsterdam
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)ER(?:$|\W)
+  end: Kostenlos
+  line: (?P<price>\d.+)\s\W\s(?P<quantity>\d)\s
+types:
+  count: float
+  price: float
+  total: float

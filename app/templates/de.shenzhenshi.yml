@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: ShenZhenShi
+fields:
+  amount: due.*\s+(\d+\.\d+)
+  date: Date:\s+(\d+\-\d+\-\d+)
+  invoice_number: Invoice.*\s+(\w+\d+)
+keywords:
+  - Shen zhen shi pin heng
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: "."
+lines:
+  start: (?:^|\W)Description(?:$|\W)
+  end: TotalVAT
+  line: (?P<description>\w+\s\w+)\s(?P<unit>\w+\s).*\s(?P<price>\d+.\d+)\s(?P<vat_procent>\d+)\W+(?P<vat_eur>\d.\d+)\W+(?P<total>\d+.\d+)
+types:
+  count: float
+  price: float
+  total: float

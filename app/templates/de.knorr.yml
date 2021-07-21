@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: knorr
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\,\d+)
+  date: Datum.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.+?(\d+)
+keywords:
+  - KNORR Sicherheitstechnik
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamt
+  end: Nettobetrag
+  line: (?P<position>\d+)\s(?P<quantity>\d+,\d+).*\s(?P<price>\d,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

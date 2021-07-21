@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: techsurfer
+fields:
+  amount: Rechnungsbetrag.*\s+(\d+\,\d+)
+  date: Lieferdatum::\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer:\s+(\w+\d+)
+keywords:
+  - S&Z Trading GmbH 
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Gesamip.(?:$|\W)
+  end: Wasserdicht
+  line: (?P<quantity>\d).*\s(?P<vat>\d,\d+)\s(?P<single_price>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  gesamtsumme: float

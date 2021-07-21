@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+issuer: cyberport
+fields:
+  amount: Gesamtbetrag\s+(\d+\,\d+) 
+  date: snr./-datum.*\s+(\d+\.\d+\.\d+)
+  invoice_number: snr./-datum.+?(\d+)
+keywords:
+  - Cyberport Store Berlin-Mitte
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Netto
+  end: Versand
+  line: .*\D.*\s+(?P<price>\d+\,\d+).*\s+(?P<summ>\d+\,\d+)
+types:
+  count: float
+  price: float
+  total: float
+  

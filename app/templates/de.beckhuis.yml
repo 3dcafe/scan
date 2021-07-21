@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+issuer: beckhuis
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\,\d+) 
+  date: Datum\s+(\d+\.\d+\.\d+)
+  invoice_number: Beleg-Nr.+?(\d+)
+keywords:
+  - Beckhuis
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Sachbearbeiter(?:$|\W)
+  end: Kreditkarte
+  line: (?P<nr>\d+).*(?P<quantity>.\w,\d+)\s(?P<price>\d+,\d+)\s(?P<total>.\w+,\d+)
+types:
+  count: float
+  price: float
+  total: float
+  

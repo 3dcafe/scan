@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: grab
+fields:
+  amount: Gesamt-Brutto\s+(\d+\,\d+)
+  date: Rechnung.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(?!12)(?!07)(\d+)
+keywords:
+  - Grab your Deal Andreas
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Gesamt(?:$|\W)
+  end: Geschenk
+  line: (?P<position>\d)\s(?P<nr>\d+).*\s(?P<indicator>\d+)\s\W(?P<tax>\d+).*\s(?P<praice>\d,\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

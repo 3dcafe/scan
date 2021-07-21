@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+issuer: Findeisen WATTn, Canon
+fields:
+  amount: \d+\.\d+ \d+\,\d+ (\d+\,\d+)
+  date: Auftragsdatum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung Nr. (\d+)
+  #amount: Gesamtbetrag:.*\s+(\d+\,\d+)
+  #date: Datum:\s+(\d+\.\d+\.\d+)
+  #invoice_number: Rechnungsnr\.: (\d+)
+keywords:
+  - Findeisen
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Normal(?:$|\W) 
+  end:  (?:^|\W)Standort(?:$|\W) 
+  line: (?P<position>\d+\s\w+\s\w+\s\w+)\s(?P<volume>\w\W\w:\s\w+)
+types:
+  count: float
+  price: float
+  total: float

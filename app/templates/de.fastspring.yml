@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: fastspring
+fields:
+  amount: Betrag.*\s+(\d+\,\d+)
+  date: bezahlt.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Auftragsnr.*\s+(\w+\d+-\d+-\d+)
+keywords:
+  - orders@fastspring.com
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Menge
+  end: Nettosumme
+  line: (?P<description>\w+)\s(?P<quantity>\d)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

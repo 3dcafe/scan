@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Sicherheitstechnik
+fields:
+  amount: Gesamtbetrag\s\W\s(\d.\d+,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s(\d+)
+keywords:
+  - Sicherheitstechnik
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Beschreibung(?:$|\W)
+  end: Netto
+  line: (?P<single_price>\d+,\d+)\s(?P<quantity>\d,\d+\s\w+.)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

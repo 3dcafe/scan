@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Versee
+fields:
+  amount: zur\s(\d+.\d+)
+  date: Design.\s\w+\s(\d+.\d+.\d+)
+  invoice_number: Design.\s+(\d+)
+keywords:
+  - Versee
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Gesamtbetrag(?:$|\W)
+  end: Artikelnr
+  line: (?P<quantity>\d+,\d+)\s(?P<ME>\w+)\s(?P<price>\d+,\d+)\s(?P<vat>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

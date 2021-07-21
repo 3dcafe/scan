@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Apple
+fields:
+  amount: EUR\s+(\d+\,\d+)
+  date: Invoice Date:\s+(\d+\.\d+\.\d+)
+  invoice_number: Invoice Number:\s(\d+)
+keywords:
+  - APPLE WEEE REGISTRATION
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Rate
+  end: Total
+  line: (?P<unit_price>\d+.\d+)\s(?P<extendet_value>\d+.\d+)\s(?P<tax_rate>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

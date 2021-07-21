@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: edelux
+fields:
+  amount: Rechnungsbetrag.*\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(\d+\-\d+)
+keywords:
+  - e-Delux GmbH 
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamtpreis
+  end: CEMENT
+  line: (?P<position>\d)\s(?P<quantity>\d,\d+)\s\W\s(?P<nr>\d+-\w+).*\s(?P<vat>\d+,\d+)\s(?P<single_price>\d+,\d+)\s(?P<amount>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

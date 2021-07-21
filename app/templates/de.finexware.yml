@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: FINEXWARE
+fields:
+  amount: Rechnungsbetrag\s(\d.\d+,\d+)
+  date: Auftrag!\s+\w+\s+(\d+.\d+.\d+)
+  invoice_number: Rechnung Nr..*\s+(\d+)
+keywords:
+  - FINEXWARE Technologies
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Einzelpreis(?:$|\W)
+  end: Zahlungsbedingungen
+  line: (?P<quantity>\w+)\s(?P<total>\d.\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

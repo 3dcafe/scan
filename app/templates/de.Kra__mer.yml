@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Krämer 
+fields:
+  amount: Zahlbetrag:\s+(\d+\,\d+)
+  date: Datum:\s+(\d+\.\d+\.\d+)
+  invoice_number: RgNr.:\s(\d+)
+keywords:
+  - Krämer IT Solutions
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamtprei
+  end: Netto
+  line: (?P<postion>\d)\s(?P<name>\w+-\w+\s\w+\s-\s\w+)\s(?P<quantity>\d)\s(?P<vat>\d+)\.\d\W\s(?P<single_summe>\d+,\d+)\s(?P<total>\d+)
+types:
+  count: float
+  price: float
+  total: float

@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: livinginstyle
+fields:
+  amount: Rechnungsbetrag\s(\d+)
+  date: Kunden-Nr.\s+\d+\s(\d+.\d+.\d+)
+  invoice_number: Rechnungs-Nr.\s(\d+)
+keywords:
+  - Living in Style
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Gesamtpreis
+  end: Zwischensumme
+  line: (?P<menge>\d)\s(?P<nr>\d+)\s(?P<artikle>\D+\d+\W)\s(?P<tax>\d+.\d+\s\W)\s(?P<total>\d+,\d+\s\W)
+types:
+  count: float
+  price: float
+  total: float

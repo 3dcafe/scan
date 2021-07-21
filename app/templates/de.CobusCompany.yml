@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: CobusCompany
+fields:
+  amount: Rechnungsbetrag\s+(\d+\,\d+)
+  date: Datum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung\s(\d+)
+keywords:
+  - Cobus Company
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: Betrag
+  end: Magnetischer
+  line: (?P<item>\d)\s(?P<single_price>\d+.\d+)\s(?P<total>\d+.\d+)
+types:
+  count: float
+  price: float
+  total: float

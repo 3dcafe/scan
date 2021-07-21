@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: redwood
+fields:
+  amount: Gesamtbetrag.*\s+(\d+\d+)
+  date: (\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(\w+\d+)
+keywords:
+  - Redwood Service GmbH
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: G-Preis
+  end: Gesamt
+  line: (?P<position>\d)\s(?P<items>\d).*(?P<vat>\d\W)\s+(?P<single_summe>\d+,\d+)\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  rechnungsbetrag: float

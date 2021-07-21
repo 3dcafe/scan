@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: eorotone
+fields:
+  amount: Total\s+(\d+\,\d+)
+  date: Rechnung.*\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnung.*\s+(?!16)(?!06)(\d+)
+keywords:
+  - Eurotone | Inh. Dennis Belen
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Preis(?:$|\W)
+  end: Porto
+  line: (?P<indicator>\d)\s\W(?P<tax>\d+).*\s(?P<price>\d+,\d+)\s\w+\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float

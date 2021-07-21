@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: Google
+fields:
+  amount: Zwischensumme.*\s+(\d+\,\d+)
+  date: Ausstellungsdatum:\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungsnummer:\s+(\d+)
+keywords:
+  - Google Ireland Limited
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Beschreibung(?:$|\W)
+  end: Intervall
+  line: (?P<name>\w\s\w+\s\w+:\s\w+)
+types:
+  count: float
+  price: float
+  total: float

@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+issuer: comtech
+fields:
+  amount: Endsumme.*\s+(\d+\,\d+)
+  date: Datum\s+(\d+\.\d+\.\d+)
+  invoice_number: Rechnungs-Nr..*\s(\d+)
+keywords:
+  - Comtech
+options:
+  currency: EUR
+  date_formats:
+    - "%d.%m.%Y"
+  languages:
+    - de
+  decimal_separator: ","
+lines:
+  start: (?:^|\W)Bezeichnung(?:$|\W)
+  end: (?:^|\W)Versandanschrift(?:$|\W)
+  line: (?P<position>\d.\d+).*\s(?P<total>\d+,\d+)
+types:
+  count: float
+  price: float
+  total: float
